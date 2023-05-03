@@ -1,0 +1,15 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ãà­Ëûÿÿÿÿ
+Q	java:S125"<This block of commented-out lines of code should be removed.(çÔó¨
+C
+java:S1172"(Remove this unused method parameter "e".(—¶¬óýÿÿÿÿ
+k
+java:S1128"PRemove this unused import 'io.github.resilience4j.bulkhead.annotation.Bulkhead'.(½Ç—ðúÿÿÿÿ
+r
+java:S1128"\Remove this unused import 'io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker'.(›èÌÇ
+e
+java:S1128"JRemove this unused import 'io.github.resilience4j.retry.annotation.Retry'.(Ä³ß¾úÿÿÿÿ
+_
+java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ
+c
+java:S1128"HRemove this unused import 'org.springframework.web.client.RestTemplate'.(Îö¼Þûÿÿÿÿ

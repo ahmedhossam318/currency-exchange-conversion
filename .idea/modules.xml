@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Api-Getway/Api-Getway.iml" filepath="$PROJECT_DIR$/Api-Getway/Api-Getway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/currency-conversion-service/currency-conversion-service.iml" filepath="$PROJECT_DIR$/currency-conversion-service/currency-conversion-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/currency-exchange-conversion.iml" filepath="$PROJECT_DIR$/.idea/currency-exchange-conversion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/currency-exchange-services8000/currency-exchange-services.iml" filepath="$PROJECT_DIR$/currency-exchange-services8000/currency-exchange-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/currency-exchange-services8001/currency-exchange-services (1).iml" filepath="$PROJECT_DIR$/currency-exchange-services8001/currency-exchange-services (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/limits-service/limits-service.iml" filepath="$PROJECT_DIR$/limits-service/limits-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/naming-server/naming-server.iml" filepath="$PROJECT_DIR$/naming-server/naming-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server.iml" filepath="$PROJECT_DIR$/spring-cloud-config-server/spring-cloud-config-server.iml" />
+    </modules>
+  </component>
+</project>

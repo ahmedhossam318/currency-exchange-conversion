@@ -1,0 +1,152 @@
+version: '3.9'
+services:
+  spring-cloud-config-server:
+    build: 
+          context: .
+          dockerfile: /spring-cloud-config-server/Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - microservices_network
+    volumes:
+      - ./target:/app
+  limits-service:
+    build: 
+          context: .
+          dockerfile: /limits-service/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - microservices_network
+    volumes:
+      - ./target:/app
+    depends_on:
+      - spring-cloud-config-server
+    environment:
+      SPRING.CONFIG.IMPORT: optional:configserver:http://spring-cloud-config-server:8888
+      SPRING.ZIPKIN.BASEURL: http://zipkin:9411
+  naming-server:
+    build: 
+          context: .
+          dockerfile: /naming-server/Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices_network
+    volumes:
+      - ./target:/app
+  api-getway:
+    build: 
+          context: .
+          dockerfile: /Api-Getway/Dockerfile
+    ports:
+      - "8765:8765"
+    networks:
+      - microservices_network
+    volumes:
+      - ./target:/app
+    depends_on:
+      - naming-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.DATASOURCE.URL: jdbc:h2:mem:testdb
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING.ZIPKIN.BASEURL: http://zipkin:9411
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  currency-exchange-8001:
+    build: 
+          context: .
+          dockerfile: /currency-exchange-services8001/Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - microservices_network
+    volumes:
+      - ./target:/app
+    depends_on:
+      - naming-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.DATASOURCE.URL: jdbc:h2:mem:testdb
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING.ZIPKIN.BASEURL: http://zipkin:9411
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+
+  currency-exchange-8000:
+    build: 
+          context: .
+          dockerfile: /currency-exchange-services8000/Dockerfile
+    ports:
+      - "8000:8000"
+    networks:
+      - microservices_network
+    volumes:
+      - ./target:/app
+    depends_on:
+      - naming-server
+      - rabbitmq
+    environment:
+     EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+     SPRING.ZIPKIN.BASEURL: http://zipkin:9411
+     RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+     SPRING_RABBITMQ_HOST: rabbitmq
+     SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  currency-conversion-service:
+    build:
+          context: .
+          dockerfile: /currency-conversion-service/Dockerfile
+    ports:
+      - "8100:8100"
+    networks:
+      - microservices_network
+    volumes:
+      - ./target:/app
+    depends_on:
+      - naming-server
+      - rabbitmq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASEURL: http://zipkin:9411
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - microservices_network
+    volumes:
+        - zipkin_data:/zipkin
+    depends_on:
+      - rabbitmq
+    environment:
+     - "RABBIT_URI: amqp://guest:guest@rabbitmq:5672"
+
+  rabbitmq:
+    image: rabbitmq:latest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - microservices_network
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+networks:
+  microservices_network:
+volumes:
+  zipkin_data:
+  rabbitmq_data:
