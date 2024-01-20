@@ -42,9 +42,6 @@ Contributions to the project are welcome! Please follow these steps:
 
 Alternatively, see the GitHub documentation on [creating a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-## License
-This project is licensed under the [MIT License](LICENSE).
-
 ## Contact
 For any queries, feel free to contact us.
 
