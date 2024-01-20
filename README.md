@@ -29,7 +29,41 @@ To run this project locally, you'll need Docker and Maven installed on your mach
 
 
 ## API Endpoints
-Describe the key API endpoints for each service, including methods, request parameters, and response formats.
+
+### API Gateway
+- **Route Requests**
+  - **Endpoint**: `/api/{service-name}/{endpoint}`
+  - **Method**: GET/POST
+  - **Description**: Routes requests to the appropriate microservice.
+  - **Request Parameters**: Dependent on specific service endpoint.
+  - **Response Format**: Dependent on specific service endpoint.
+
+### Currency Conversion Service
+- **Convert Currency**
+  - **Endpoint**: `/currency-conversion/from/{from}/to/{to}/quantity/{quantity}`
+  - **Method**: GET
+  - **Request Parameters**:
+    - `from`: Source currency (e.g., USD)
+    - `to`: Target currency (e.g., INR)
+    - `quantity`: Amount to be converted
+  - **Response Format**: JSON containing converted amount and conversion details.
+
+### Currency Exchange Service
+- **Retrieve Exchange Rate**
+  - **Endpoint**: `/currency-exchange/from/{from}/to/{to}`
+  - **Method**: GET
+  - **Request Parameters**:
+    - `from`: Source currency
+    - `to`: Target currency
+  - **Response Format**: JSON with the exchange rate and additional currency details.
+
+### Limits Service
+- **Retrieve Configuration Limits**
+  - **Endpoint**: `/limits`
+  - **Method**: GET
+  - **Description**: Fetches the current configuration limits.
+  - **Response Format**: JSON containing configuration details like minimum and maximum values.
+
 
 ## Contributing
 Contributions to the project are welcome! Please follow these steps:
